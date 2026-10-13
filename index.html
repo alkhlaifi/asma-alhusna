@@ -423,11 +423,11 @@ function render(){
   if(!shown.length){L.innerHTML=`<div class="empty">${filter==="fav"?"لم تُضف أسماء إلى المفضلة بعد — اضغط ☆ داخل أي اسم":"لا نتائج مطابقة"}</div>`;return}
   if(view==="table"){
     L.innerHTML=`<div class="tablewrap"><table><thead><tr><th>م</th><th>الاسم</th><th>المعنى</th><th class="hide-sm">المرجع</th></tr></thead><tbody>${
-      shown.map(i=>{const x=NAMES[i];return`<tr data-i="${i}"><td class="ti">${x[2]!=="b"?"✦":toAr(i+1)}</td><td class="tn">${x[0]}</td><td>${SHORT(x)}<span class="ref-sm">${SRC(x)}</span></td><td class="tr hide-sm">${SRC(x)}</td></tr>`}).join("")
+      shown.map(i=>{const x=NAMES[i];return`<tr data-i="${i}"><td class="ti">${toAr(i+1)}</td><td class="tn">${x[0]}</td><td>${SHORT(x)}<span class="ref-sm">${SRC(x)}</span></td><td class="tr hide-sm">${SRC(x)}</td></tr>`}).join("")
     }</tbody></table></div>`;
   }else{
     L.innerHTML=`<div class="grid">${shown.map(i=>{const x=NAMES[i],n=x[0],m=SHORT(x);
-      return`<div class="card ${learn?"hidden-m":""} ${learn&&done.has(i)?"done":""}" data-i="${i}"><span class="num">${x[2]!=="b"?"✦":toAr(i+1)}</span>${favs.has(i)?'<span class="fav">★</span>':""}<div class="n">${n}</div><div class="mm">${m}</div></div>`}).join("")}</div>`;
+      return`<div class="card ${learn?"hidden-m":""} ${learn&&done.has(i)?"done":""}" data-i="${i}"><span class="num">${toAr(i+1)}</span>${favs.has(i)?'<span class="fav">★</span>':""}<div class="n">${n}</div><div class="mm">${m}</div></div>`}).join("")}</div>`;
   }
   L.querySelectorAll("[data-i]").forEach(el=>el.onclick=()=>openSheet(+el.dataset.i));
 }
@@ -436,7 +436,7 @@ function render(){
 function openSheet(i){
   current=i; const x=NAMES[i],n=x[0],m=MEAN(x),s=x[2]; const learn=view==="learn";
   $("#sheet").innerHTML=`<div class="grab"></div>
-    <div class="badge">${x[2]==="x"?"من الأسماء الأخرى":x[2]==="y"?"مما ذكره البيهقي":toAr(i+1)+" / ٩٩"}</div>
+    <div class="badge">${toAr(i+1)+" / "+toAr(NAMES.length)+(x[2]==="x"?" — من الأسماء الأخرى":x[2]==="y"?" — مما ذكره البيهقي":"")}</div>
     <div class="big">${n}</div><div class="orn">✦ ✦ ✦</div>
     <div class="mean" id="mean" ${learn&&!done.has(i)?'style="filter:blur(6px);cursor:pointer"':""}>${m||""}</div>
     ${SRC(x)?`<div class="badge">المرجع: ${SRC(x)}</div>`:""}
