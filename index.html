@@ -511,7 +511,9 @@ addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferred=e;$("#ins
 $("#installBtn").onclick=async()=>{if(!deferred)return;deferred.prompt();await deferred.userChoice;deferred=null;$("#installBtn").style.display="none"};
 const isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent), standalone=matchMedia("(display-mode: standalone)").matches||navigator.standalone;
 if(isIOS&&!standalone){const b=$("#installBtn");b.style.display="block";b.textContent="للتثبيت: اضغط زر المشاركة ⬆︎ ثم «إضافة إلى الشاشة الرئيسية»";b.onclick=null}
-if("serviceWorker" in navigator && location.protocol.startsWith("http")) navigator.serviceWorker.register("sw.js").catch(()=>{});
+if("serviceWorker" in navigator && location.protocol.startsWith("http")) navigator.serviceWorker.register("sw.js",{updateViaCache:"none"}).then(r=>r.update()).catch(()=>{});
+  let reloaded=false;
+  navigator.serviceWorker.addEventListener("controllerchange",()=>{if(!reloaded){reloaded=true;location.reload();}});
 
 renderToday(); render();
 </script>
