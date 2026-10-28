@@ -140,6 +140,8 @@ footer .credit{font-family:"Amiri";font-size:17px;color:var(--ink)}
 .install{display:none;margin:0 auto 14px;background:linear-gradient(90deg,var(--gold),var(--gold2));color:var(--green);border:0;border-radius:14px;padding:11px 18px;font-weight:700;font-size:15px}
 .qrbox{margin:0 auto 18px;display:flex;flex-direction:column;align-items:center;gap:8px;font-size:14px;color:var(--ink)}
 .qrbox img{background:#fff;padding:8px;border-radius:14px;border:1px solid var(--line);width:150px;height:150px}
+.visits{margin:0 auto 14px;display:inline-block;background:var(--chip);border-radius:999px;padding:4px 14px;font-size:13px;color:var(--ink)}
+.visits b{color:var(--gold)}
 .toast{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);background:var(--green);color:#fff;padding:9px 18px;border-radius:12px;font-size:14px;opacity:0;transition:opacity .25s;z-index:30;pointer-events:none}
 .toast.show{opacity:1}
 .about{font-size:14px;text-align:right;line-height:1.9}
@@ -202,6 +204,7 @@ tr.grp td{font-size:12px;color:var(--muted);font-weight:700;background:transpare
     <img src="qr.png" alt="باركود تطبيق أسماء الله الحسنى" width="150" height="150">
     <div>امسح الباركود لمشاركة التطبيق وانشر الخير</div>
   </div>
+  <div class="visits" id="visits" hidden>👁️ عدد الزيارات: <b id="vcount">…</b></div>
   <div class="credit">إعداد أ/ محمد بن سعود الخليفي</div>
   صدقة جارية عنه، ووالديه، وأهل بيته، ومن نشره
   <div style="margin-top:8px;font-size:12px">الأسماء: ما عدّه الشيخ علوي السقاف والشيخ ابن عثيمين في «القواعد المثلى»، ثم ما ثبت مما ذكره علماء آخرون • المعاني والأدلة من كتب الشيخ علوي بن عبدالقادر السقاف وكتب الأسماء الحسنى المذكورة مع كل اسم</div>
@@ -311,7 +314,7 @@ const NAMES=[
 "dp": 44,
 "g": 4,
 "s": "a",
-"note": ""
+"note": "من الأسماء المزدوجة. قال القحطاني (ص ٧٧): «هذه الأسماء الأربعة المباركة قد فسرها النبي ﷺ تفسيرًا جامعًا واضحًا…» «فتدبّر هذه المعاني الجليلة الدالة على تفرد الرب العظيم بالكمال المطلق والإحاطة المطلقة الزمانية في قوله: «الأول والآخر»، والمكانية في «الظاهر والباطن»»."
 },
 {
 "n": "الآخر",
@@ -322,7 +325,7 @@ const NAMES=[
 "dp": 388,
 "g": 4,
 "s": "a",
-"note": ""
+"note": "من الأسماء المزدوجة. قال القحطاني (ص ٧٧): «هذه الأسماء الأربعة المباركة قد فسرها النبي ﷺ تفسيرًا جامعًا واضحًا…» «فتدبّر هذه المعاني الجليلة الدالة على تفرد الرب العظيم بالكمال المطلق والإحاطة المطلقة الزمانية في قوله: «الأول والآخر»، والمكانية في «الظاهر والباطن»»."
 },
 {
 "n": "الظاهر",
@@ -333,7 +336,7 @@ const NAMES=[
 "dp": 236,
 "g": 4,
 "s": "a",
-"note": ""
+"note": "من الأسماء المزدوجة. قال القحطاني (ص ٧٧): «هذه الأسماء الأربعة المباركة قد فسرها النبي ﷺ تفسيرًا جامعًا واضحًا…» «فتدبّر هذه المعاني الجليلة الدالة على تفرد الرب العظيم بالكمال المطلق والإحاطة المطلقة الزمانية في قوله: «الأول والآخر»، والمكانية في «الظاهر والباطن»»."
 },
 {
 "n": "الباطن",
@@ -344,7 +347,7 @@ const NAMES=[
 "dp": 78,
 "g": 4,
 "s": "a",
-"note": ""
+"note": "من الأسماء المزدوجة. قال القحطاني (ص ٧٧): «هذه الأسماء الأربعة المباركة قد فسرها النبي ﷺ تفسيرًا جامعًا واضحًا…» «فتدبّر هذه المعاني الجليلة الدالة على تفرد الرب العظيم بالكمال المطلق والإحاطة المطلقة الزمانية في قوله: «الأول والآخر»، والمكانية في «الظاهر والباطن»»."
 },
 {
 "n": "الرحمن",
@@ -487,7 +490,7 @@ const NAMES=[
 "dp": 103,
 "g": 7,
 "s": "a",
-"note": ""
+"note": "من الأسماء المزدوجة: قال البدر في «فقه الأسماء الحسنى» (ص ٢٨٠): «وهذان الاسمان من الأسماء المزدوجة المتقابلة التي لا يطلق واحد بمفرده على الله إلا مقرونًا بالآخر، فإن الكمال من اجتماعهما»."
 },
 {
 "n": "المؤخر",
@@ -498,7 +501,7 @@ const NAMES=[
 "dp": 103,
 "g": 7,
 "s": "a",
-"note": ""
+"note": "من الأسماء المزدوجة: قال البدر في «فقه الأسماء الحسنى» (ص ٢٨٠): «وهذان الاسمان من الأسماء المزدوجة المتقابلة التي لا يطلق واحد بمفرده على الله إلا مقرونًا بالآخر، فإن الكمال من اجتماعهما»."
 },
 {
 "n": "الرزاق",
@@ -520,7 +523,7 @@ const NAMES=[
 "dp": 83,
 "g": 8,
 "s": "a",
-"note": ""
+"note": "من الأسماء المزدوجة: قال الحليمي فيما نقله النجدي في «النهج الأسمى» (٢/ ١٢٥): «ولا ينبغي أن يُدعى ربنا جل جلاله باسم: القابض، حتى يقال معه: الباسط»."
 },
 {
 "n": "القابض",
@@ -531,7 +534,7 @@ const NAMES=[
 "dp": 83,
 "g": 8,
 "s": "a",
-"note": ""
+"note": "من الأسماء المزدوجة: قال الحليمي فيما نقله النجدي في «النهج الأسمى» (٢/ ١٢٥): «ولا ينبغي أن يُدعى ربنا جل جلاله باسم: القابض، حتى يقال معه: الباسط»."
 },
 {
 "n": "المعطي",
@@ -1789,6 +1792,24 @@ if("serviceWorker" in navigator && location.protocol.startsWith("http")){
   let reloaded=false;
   navigator.serviceWorker.addEventListener("controllerchange",()=>{if(!reloaded){reloaded=true;location.reload();}});
 }
+
+/* ---------- عداد الزيارات: كل فتح للتطبيق زيارة ---------- */
+const VKEY="alkhlaifi-asma-alhusna-visits", VAPI="https://countapi.mileshilliard.com/api/v1/";
+function countVisit(){
+  fetch(VAPI+"hit/"+VKEY,{cache:"no-store"}).then(r=>r.json()).then(d=>{
+    if(d&&d.value!=null){$("#vcount").textContent=toAr(Number(d.value).toLocaleString("en-US"));$("#visits").hidden=false}
+  }).catch(()=>{
+    // احتياط: إن منع المتصفح قراءة الرد، نعرض العدد صورةً دون زيادة
+    const v=$("#visits"); if(!navigator.onLine) return;
+    v.innerHTML='👁️ عدد الزيارات: <img alt="" onerror="this.parentNode.hidden=true" style="vertical-align:middle;height:18px" src="'+VAPI+'get/'+VKEY+'/shield?text=%20&t='+Date.now()+'">'; v.hidden=false;
+  });
+}
+countVisit();
+let hiddenAt=0;
+document.addEventListener("visibilitychange",()=>{
+  if(document.hidden){hiddenAt=Date.now()}
+  else if(hiddenAt&&Date.now()-hiddenAt>60000){countVisit()} // رجع للتطبيق بعد خروجه (أكثر من دقيقة)
+});
 
 renderToday(); render();
 </script>

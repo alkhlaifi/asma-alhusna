@@ -1,4 +1,4 @@
-const CACHE = "asma-v15";
+const CACHE = "asma-v16";
 const SHELL = ["./", "index.html", "manifest.webmanifest", "icon-192.png", "icon-512.png", "qr.png"];
 
 self.addEventListener("install", e => {
@@ -10,6 +10,7 @@ self.addEventListener("activate", e => {
 self.addEventListener("fetch", e => {
   const req = e.request;
   if (req.method !== "GET") return;
+  if (new URL(req.url).origin !== self.location.origin && !req.url.startsWith("https://fonts.")) return; // عداد الزيارات وأي خدمة خارجية: من الإنترنت دائمًا
   const isPage = req.mode === "navigate" || req.destination === "document" || req.url.endsWith(".html") || req.url.endsWith("/");
   if (isPage) {
     // الصفحة: من الإنترنت أولًا (أحدث نسخة)، والنسخة المحفوظة عند انقطاع الاتصال
