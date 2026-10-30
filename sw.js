@@ -1,4 +1,4 @@
-const CACHE = "asma-v17";
+const CACHE = "asma-v19";
 const SHELL = ["./", "index.html", "manifest.webmanifest", "icon-192.png", "icon-512.png", "qr.png"];
 
 self.addEventListener("install", e => {
